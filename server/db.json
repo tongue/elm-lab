@@ -1,0 +1,54 @@
+{
+  "users": [
+    {
+      "id": 0,
+      "picture": "http://placehold.it/32x32",
+      "age": 37,
+      "eyeColor": "brown",
+      "firstName": "Head",
+      "lastName": "Mcfadden",
+      "company": "SOFTMICRO",
+      "email": "head.mcfadden@softmicro.biz"
+    },
+    {
+      "id": 1,
+      "picture": "http://placehold.it/32x32",
+      "age": 26,
+      "eyeColor": "blue",
+      "firstName": "Butler",
+      "lastName": "Miranda",
+      "company": "AMTAS",
+      "email": "butler.miranda@amtas.org"
+    },
+    {
+      "id": 2,
+      "picture": "http://placehold.it/32x32",
+      "age": 23,
+      "eyeColor": "brown",
+      "firstName": "Hollie",
+      "lastName": "Rich",
+      "company": "BEDDER",
+      "email": "hollie.rich@bedder.co.uk"
+    },
+    {
+      "id": 3,
+      "picture": "http://placehold.it/32x32",
+      "age": 40,
+      "eyeColor": "brown",
+      "firstName": "Hannah",
+      "lastName": "Hodges",
+      "company": "ORBALIX",
+      "email": "hannah.hodges@orbalix.info"
+    },
+    {
+      "id": 4,
+      "picture": "http://placehold.it/32x32",
+      "age": 22,
+      "eyeColor": "brown",
+      "firstName": "Davis",
+      "lastName": "Rowe",
+      "company": "LEXICONDO",
+      "email": "davis.rowe@lexicondo.me"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "elm",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "elm-live user-app/Main.elm & json-server --watch server/db.json -p 5019"
+  },
+  "dependencies": {
+    "elm-live": "^4.0.2",
+    "json-server": "^0.16.2"
+  }
+}
