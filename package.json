@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "elm-live user-app/Main.elm & json-server --watch server/db.json -p 5019"
+    "start": "elm-live src/Main.elm & json-server --watch server/db.json -p 5019"
   },
   "dependencies": {
     "elm-live": "^4.0.2",

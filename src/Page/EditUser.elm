@@ -42,7 +42,7 @@ initialModel navKey =
 fetchUser : UserId -> Cmd Msg
 fetchUser userId =
     Http.get
-        { url = "http://localhost:5019/users" ++ User.idToString userId
+        { url = "http://localhost:5019/users/" ++ User.idToString userId
         , expect =
             userDecoder
                 |> Http.expectJson (RemoteData.fromResult >> UserRecieved)
@@ -99,7 +99,7 @@ saveUser user =
         RemoteData.Success userData ->
             let
                 userUrl =
-                    "http://localhost:5019/posts/"
+                    "http://localhost:5019/users/"
                         ++ User.idToString userData.id
             in
             Http.request

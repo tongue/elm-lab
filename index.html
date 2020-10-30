@@ -6230,7 +6230,7 @@ var $author$project$Page$EditUser$fetchUser = function (userId) {
 				$elm$http$Http$expectJson,
 				A2($elm$core$Basics$composeR, $krisajenkins$remotedata$RemoteData$fromResult, $author$project$Page$EditUser$UserRecieved),
 				$author$project$User$userDecoder),
-			url: 'http://localhost:5019/users' + $author$project$User$idToString(userId)
+			url: 'http://localhost:5019/users/' + $author$project$User$idToString(userId)
 		});
 };
 var $krisajenkins$remotedata$RemoteData$Loading = {$: 'Loading'};
@@ -6759,7 +6759,7 @@ var $author$project$User$userEncoder = function (user) {
 var $author$project$Page$EditUser$saveUser = function (user) {
 	if (user.$ === 'Success') {
 		var userData = user.a;
-		var userUrl = 'http://localhost:5019/posts/' + $author$project$User$idToString(userData.id);
+		var userUrl = 'http://localhost:5019/users/' + $author$project$User$idToString(userData.id);
 		return $elm$http$Http$request(
 			{
 				body: $elm$http$Http$jsonBody(
