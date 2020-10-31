@@ -11,16 +11,6 @@
       "email": "head.mcfadden@softmicro.biz"
     },
     {
-      "id": 1,
-      "picture": "http://placehold.it/32x32",
-      "age": 26,
-      "eyeColor": "blue",
-      "firstName": "Butler",
-      "lastName": "Mirandaadsasd",
-      "company": "AMTAS",
-      "email": "butler.miranda@amtas.org"
-    },
-    {
       "id": 2,
       "picture": "http://placehold.it/32x32",
       "age": 23,
@@ -49,6 +39,11 @@
       "lastName": "Rower",
       "company": "LEXICONDO",
       "email": "davis.rowe@lexicondo.me"
+    },
+    {
+      "firstName": "Johan",
+      "lastName": "Bergström",
+      "id": 5
     }
   ]
 }

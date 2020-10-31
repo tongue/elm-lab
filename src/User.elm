@@ -1,4 +1,14 @@
-module User exposing (User, UserId, idParser, idToString, userDecoder, userEncoder, usersDecoder)
+module User exposing
+    ( User
+    , UserId
+    , emptyUser
+    , idParser
+    , idToString
+    , newUserEncoder
+    , userDecoder
+    , userEncoder
+    , usersDecoder
+    )
 
 import Json.Decode as Decode exposing (Decoder, int, list, string)
 import Json.Decode.Pipeline exposing (required)
@@ -12,11 +22,8 @@ type UserId
 
 type alias User =
     { id : UserId
-    , age : Int
     , firstName : String
     , lastName : String
-    , email : String
-    , picture : String
     }
 
 
@@ -39,11 +46,8 @@ userDecoder : Decoder User
 userDecoder =
     Decode.succeed User
         |> required "id" idDecoder
-        |> required "age" int
         |> required "firstName" string
         |> required "lastName" string
-        |> required "email" string
-        |> required "picture" string
 
 
 idParser : Parser (UserId -> a) a
@@ -62,6 +66,27 @@ userEncoder user =
         ]
 
 
+newUserEncoder : User -> Encode.Value
+newUserEncoder user =
+    Encode.object
+        [ ( "firstName", Encode.string user.firstName )
+        , ( "lastName", Encode.string user.lastName )
+        ]
+
+
 encodeId : UserId -> Encode.Value
 encodeId (UserId id) =
     Encode.int id
+
+
+emptyUser : User
+emptyUser =
+    { id = emptyUserId
+    , firstName = ""
+    , lastName = ""
+    }
+
+
+emptyUserId : UserId
+emptyUserId =
+    UserId -1

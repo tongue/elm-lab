@@ -12,17 +12,27 @@ import User exposing (User, UserId, usersDecoder)
 
 type alias Model =
     { users : WebData (List User)
+    , deleteError : Maybe String
     }
 
 
 type Msg
     = FetchUsers
     | UsersRecieved (WebData (List User))
+    | DeleteUser UserId
+    | UserDeleted (Result Http.Error String)
 
 
 init : ( Model, Cmd Msg )
 init =
-    ( { users = RemoteData.Loading }, fetchUsers )
+    ( initialModel, fetchUsers )
+
+
+initialModel : Model
+initialModel =
+    { users = RemoteData.Loading
+    , deleteError = Nothing
+    }
 
 
 fetchUsers : Cmd Msg
@@ -44,13 +54,42 @@ update msg model =
         UsersRecieved response ->
             ( { model | users = response }, Cmd.none )
 
+        DeleteUser userId ->
+            ( model, deleteUser userId )
+
+        UserDeleted (Ok _) ->
+            ( model, fetchUsers )
+
+        UserDeleted (Err error) ->
+            ( { model | deleteError = Just (buildErrorMessage error) }
+            , Cmd.none
+            )
+
+
+deleteUser : UserId -> Cmd Msg
+deleteUser userId =
+    Http.request
+        { method = "DELETE"
+        , headers = []
+        , url = "http://localhost:5019/users/" ++ User.idToString userId
+        , body = Http.emptyBody
+        , expect = Http.expectString UserDeleted
+        , timeout = Nothing
+        , tracker = Nothing
+        }
+
 
 view : Model -> Html Msg
 view model =
     div []
         [ button [ onClick FetchUsers ]
             [ text "Refresh users" ]
+        , p []
+            [ a [ href "/users/new" ]
+                [ text "Create new user" ]
+            ]
         , viewUsers model.users
+        , viewDeleteError model.deleteError
         ]
 
 
@@ -101,6 +140,10 @@ viewUser user =
             [ text user.lastName ]
         , td []
             [ a [ href userPath ] [ text "Edit" ] ]
+        , td []
+            [ button [ type_ "button", onClick (DeleteUser user.id) ]
+                [ text "Delete" ]
+            ]
         ]
 
 
@@ -114,3 +157,16 @@ viewFetchError errorMessage =
         [ h3 [] [ text errorHeading ]
         , text ("Error: " ++ errorMessage)
         ]
+
+
+viewDeleteError : Maybe String -> Html msg
+viewDeleteError maybeError =
+    case maybeError of
+        Just error ->
+            div []
+                [ h3 [] [ text "Couldn't delete post at this time." ]
+                , text ("Error: " ++ error)
+                ]
+
+        Nothing ->
+            text ""

@@ -10,6 +10,7 @@ type Route
     = NotFound
     | Users
     | User UserId
+    | NewUser
 
 
 parseUrl : Url -> Route
@@ -28,6 +29,7 @@ matchRoute =
         [ map Users top
         , map Users (s "users")
         , map User (s "users" </> User.idParser)
+        , map NewUser (s "users" </> s "new")
         ]
 
 
@@ -48,3 +50,6 @@ routeToString route =
 
         User userId ->
             "/users/" ++ User.idToString userId
+
+        NewUser ->
+            "/users/new"
